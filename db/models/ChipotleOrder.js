@@ -11,6 +11,7 @@ const ChipotleOrderSchema = new mongoose.Schema({
     description: { type: String },
     orderName: { type: String },
     chainName: { type: String, value: 'Chipotle' },
+    chain: { type: mongoose.Schema.Types.ObjectId, ref: 'Chain' },
     userFullName: { type: String },
     users: [
         {
