@@ -1,10 +1,10 @@
 const express = require('express');
-const ChipotleOrder = require('../db/models/ChipotleOrder.js');
+const Chain = require('../db/models/Chain.js');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    ChipotleOrder.find({}).then(allOrders => res.json(allOrders));
+    Chain.find({}).then(chains => res.json(chains));
 });
 
 module.exports = router;
