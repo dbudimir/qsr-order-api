@@ -3,8 +3,30 @@ const User = require('../db/models/User.js');
 
 const router = express.Router();
 
+// router.get('/', (req, res) => {
+//     User.find({}).then(allUsers => res.json(allUsers));
+// });
+
 router.get('/', (req, res) => {
-    User.find({}).then(allUsers => res.json(allUsers));
+    User.find({})
+        .populate({
+            path: 'chains',
+            select: 'name',
+        })
+        .then(allUsers => res.json(allUsers));
+});
+
+router.get('/orders/:userFullName', (req, res) => {
+    User.find({ userFullName: req.params.userFullName })
+        .populate({
+            path: 'chains',
+            populate: {
+                path: 'orders',
+                model: 'AndPizzaOrder',
+                // match: { 'orders.userFullName': req.params.userFullName },
+            },
+        })
+        .then(allUsers => res.json(allUsers));
 });
 
 router.post('/create/:userFullName', (req, res) => {
