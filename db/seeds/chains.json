@@ -1,0 +1,12 @@
+[
+   {
+      "name": "Chipotle",
+      "cuisine": "Mexican",
+      "orderSchema": "ChipotleOrder"
+   },
+   {
+      "name": "&pizza",
+      "cuisine": "Pizza",
+      "orderSchema": "AndPizzaOrder"
+   }
+]

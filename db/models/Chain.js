@@ -7,7 +7,7 @@ const ChainSchema = new mongoose.Schema({
     orders: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'ChipotleOrder',
+            ref: this.orderSchema,
         },
     ],
 });

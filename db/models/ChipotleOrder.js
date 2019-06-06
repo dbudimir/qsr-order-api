@@ -8,10 +8,9 @@ const ChipotleOrderSchema = new mongoose.Schema({
     rice: { type: String },
     beans: { type: String },
     toppings: [],
-    description: { type: String },
     orderName: { type: String },
+    description: { type: String },
     chainName: { type: String, value: 'Chipotle' },
-    chain: { type: mongoose.Schema.Types.ObjectId, ref: 'Chain' },
     userFullName: { type: String },
     users: [
         {
