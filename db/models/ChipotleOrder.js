@@ -10,7 +10,6 @@ const ChipotleOrderSchema = new mongoose.Schema({
     toppings: [],
     orderName: { type: String },
     description: { type: String },
-    chainName: { type: String, value: 'Chipotle' },
     userFullName: { type: String },
     users: [
         {

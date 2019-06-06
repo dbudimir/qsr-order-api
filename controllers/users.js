@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../db/models/User.js');
+const Chain = require('../db/models/Chain.js');
 
 const router = express.Router();
 
@@ -22,8 +23,8 @@ router.get('/orders/:userFullName', (req, res) => {
             path: 'chains',
             populate: {
                 path: 'orders',
-                model: 'AndPizzaOrder',
-                // match: { 'orders.userFullName': req.params.userFullName },
+                model: Chain.orderSchema,
+                match: { userFullName: req.params.userFullName },
             },
         })
         .then(allUsers => res.json(allUsers));

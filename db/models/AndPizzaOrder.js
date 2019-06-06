@@ -10,7 +10,6 @@ const AndPizzaOrderSchema = new mongoose.Schema({
     finishes: [],
     orderName: { type: String },
     description: { type: String },
-    chainName: { type: String, value: '&pizza' },
     userFullName: { type: String },
     users: [
         {
