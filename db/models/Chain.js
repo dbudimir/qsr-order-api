@@ -1,6 +1,7 @@
 const mongoose = require('../connection.js');
 
 const ChainSchema = new mongoose.Schema({
+    timestamp: { type: String },
     name: { type: String },
     cuisine: { type: String },
     orderSchema: { type: String },

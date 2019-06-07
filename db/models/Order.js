@@ -10,6 +10,7 @@ const OrderSchema = new mongoose.Schema({
         {
             ref: 'Chain',
             type: mongoose.Schema.Types.ObjectId,
+            maxItems: 1,
         },
     ],
     users: [

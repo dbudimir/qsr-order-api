@@ -1,6 +1,7 @@
 const mongoose = require('../connection.js');
 
 const ChipotleOrderSchema = new mongoose.Schema({
+    timestamp: { type: String },
     mealType: { type: String },
     tortilla: { type: String },
     fillings: [],

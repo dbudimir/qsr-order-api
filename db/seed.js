@@ -9,50 +9,90 @@ const AndPizzaOrder = require('./models/AndPizzaOrder.js');
 
 const Order = require('../db/models/Order.js');
 
-function chipotleContent() {
-    ChipotleOrder.find({}).deleteMany(() => {
-        ChipotleOrder.insertMany(chipotleOrders).then(orders => orders);
-    });
-}
-
-function andPizzaContent() {
-    AndPizzaOrder.find({}).deleteMany(() => {
-        AndPizzaOrder.insertMany(andPizzaOrders).then(orders => orders);
-    });
-}
-
-function setValues(chainOrders, currentChain) {
-    Order.insertMany(chainOrders).then(orders => {
-        orders.forEach(order => {
-            currentChain[0].orders.push(order);
-            order.chain.push(currentChain[0]._id);
-            if (typeof order.userFullName === 'string') {
-                User.find({ userFullName: order.userFullName }).then(user => {
-                    user[0].orders.push(order);
-                    user[0].save();
-                });
-            }
-            order.save().then(() => currentChain[0].save());
+function matchOrders(chainContent, chainContentOrders) {
+    chainContent.find({}).deleteMany(() => {
+        chainContent.insertMany(chainContentOrders).then(orders => {
+            orders.forEach(order => {
+                Order.updateOne(
+                    { timestamp: order.timestamp },
+                    { $push: { orderContent: order._id } },
+                    { upsert: true }
+                ).then(updatedOrder => updatedOrder);
+            });
         });
     });
 }
 
-// function matchOrders(chainOrders, currentChain) {
-//    orders.forEach(order => {
-// }
+// AndPizzaOrder.find({}).deleteMany(() => {
+//     AndPizzaOrder.insertMany(andPizzaOrders).then(orders => {
+//         orders.forEach(order => {
+//             Order.updateOne({ timestamp: order.timestamp }, { $push: { orderContent: order._id } }, { upsert: true });
+//         });
+//     });
+// });
+
+function setValues(chainOrders, currentChain, allUsers) {
+    Order.insertMany(chainOrders).then(orders => {
+        orders.forEach(order => {
+            // Associate order => chain
+            Chain.updateOne(
+                { name: currentChain[0].name },
+                { $push: { orders: order._id } },
+                { upsert: true },
+                function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                }
+            );
+            // Associate chain => order
+            Order.updateOne({ chain: [] }, { $push: { chain: currentChain[0]._id } }, { upsert: true }, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            if (typeof order.userFullName === 'string') {
+                User.updateOne(
+                    { userFullName: order.userFullName },
+                    { $push: { orders: order } },
+                    { upsert: true },
+                    function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    }
+                );
+                User.findOne({ userFullName: order.userFullName }).then(user => {
+                    Order.updateOne(
+                        { userFullName: order.userFullName, users: [] },
+                        { $push: { users: user._id } },
+                        { upsert: true },
+                        function(err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                        }
+                    );
+                });
+            }
+        });
+    });
+}
 
 Chain.find({}).deleteMany(() => {
     Chain.insertMany(chains).then(allChains => {
         User.find({}).deleteMany(() => {
-            User.insertMany(users).then(() => {
+            User.insertMany(users).then(allUsers => {
                 Order.find({})
                     .deleteMany(() => {
                         const currentChain = allChains.filter(chain => chain.name === 'Chipotle');
-                        setValues(chipotleOrders, currentChain);
+                        setValues(chipotleOrders, currentChain, allUsers);
+                        matchOrders(ChipotleOrder, chipotleOrders);
                     })
                     .then(() => {
                         const currentChain = allChains.filter(chain => chain.name === '&pizza');
-                        setValues(andPizzaOrders, currentChain);
+                        setValues(andPizzaOrders, currentChain, allUsers);
+                        matchOrders(AndPizzaOrder, andPizzaOrders);
                     });
             });
         });
