@@ -3,10 +3,10 @@ const mongoose = require('../connection.js');
 const UserSchema = new mongoose.Schema({
     userFullName: { type: String },
     email: { type: String },
-    chains: [
+    orders: [
         {
+            ref: 'Order',
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Chain',
         },
     ],
 });

@@ -10,14 +10,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     User.find({})
-        .populate({
-            path: 'chains',
-            select: 'name',
-        })
+        // .populate({
+        //     path: 'orders',
+        //     model: 'Order',
+        // })
         .then(allUsers => res.json(allUsers));
 });
 
-router.get('/orders/:userFullName', (req, res) => {
+router.get('/:userFullName', (req, res) => {
     User.find({ userFullName: req.params.userFullName })
         .populate({
             path: 'chains',
