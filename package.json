@@ -1,27 +1,31 @@
 {
-  "name": "qsr-order-api",
-  "version": "1.0.0",
-  "description": "An API for custom orders at quick service restaurants.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dbudimir/qsr-order-api.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dbudimir/qsr-order-api/issues"
-  },
-  "homepage": "https://github.com/dbudimir/qsr-order-api#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongodb": "^3.2.7",
-    "mongoose": "^5.5.12"
-  }
+   "name": "qsr-order-api",
+   "version": "1.0.0",
+   "description": "An API for custom orders at quick service restaurants.",
+   "main": "index.js",
+   "scripts": {
+      "start": "node index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/dbudimir/qsr-order-api.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/dbudimir/qsr-order-api/issues"
+   },
+   "homepage": "https://github.com/dbudimir/qsr-order-api#readme",
+   "dependencies": {
+      "async": "^3.0.1",
+      "body-parser": "^1.19.0",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "heroku": "^7.25.0",
+      "mongodb": "^3.2.7",
+      "mongoose": "^5.5.12",
+      "mongoose-deep-populate": "^3.1.1"
+   }
 }
