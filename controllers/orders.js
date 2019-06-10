@@ -27,7 +27,7 @@ router.get('/id/:id', async (req, res) => {
 });
 
 // Makes it possible to produce a result based on criteria in a sub document.
-router.get('/chain/nested/:name', async (req, res) => {
+router.get('/chain-nested/:name', async (req, res) => {
     const chainOrders = [];
     const results = [];
     await Order.find({}, function(err, data) {
@@ -35,10 +35,29 @@ router.get('/chain/nested/:name', async (req, res) => {
             chainOrders.push(value);
         });
     })
-        .deepPopulate(['chain', 'users', 'orderContent'])
+        .deepPopulate(['users', 'orderContent'])
         .populate({ path: 'chain', refPath: 'chainSchema' });
     chainOrders.forEach(order => {
         if (order.chain[0].name === req.params.name) {
+            results.push(order);
+        }
+    });
+    res.send(results);
+});
+
+// Produces all orders that contain black beans or pinto beans.
+router.get('/beans/:beans', async (req, res) => {
+    const chainOrders = [];
+    const results = [];
+    await Order.find({}, function(err, data) {
+        data.forEach(function(value) {
+            chainOrders.push(value);
+        });
+    })
+        .deepPopulate(['users', 'orderContent'])
+        .populate({ path: 'orderContent' });
+    chainOrders.forEach(order => {
+        if (order.orderContent[0].beans === req.params.beans) {
             results.push(order);
         }
     });
