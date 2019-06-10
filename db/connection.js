@@ -17,4 +17,4 @@ mongoose
 
 module.exports = mongoose;
 
-// heroku config:set DB_URL:"mongodb+srv://dbudi:Berrks^1bashers@cluster0-4i2eg.mongodb.net/test?retryWrites=true&w=majority"
+// heroku config:set DB_URL:"mongodb+srv://david:Berks^1bashers@cluster0-4i2eg.mongodb.net/test?retryWrites=true&w=majority"
