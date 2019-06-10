@@ -1,5 +1,5 @@
 {
-   "name": "qsr-order-api",
+   "name": "qsr-order",
    "version": "1.0.0",
    "description": "An API for custom orders at quick service restaurants.",
    "main": "index.js",
