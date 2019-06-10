@@ -1,0 +1,17 @@
+{
+   "user": {
+      "userFullName": "George Washnigton"
+   },
+   "order": {
+      "dough": "Gluten-Free",
+      "sauce": ["Classic Tomato"],
+      "cheese": "Vegan Mozzarella",
+      "veggies": ["Broccoli", "Grilled Onion", "Jalapeno", "Tomato", "Mushroom", "Spinach", "Pineapple", "Spicy Chickpea"],
+      "protiens": "Vegan Sausage",
+      "finishes": ["Arugula", "Basil", "Kalamata Olive", "Black Pepper"],
+      "orderName": "The New User Test Order",
+      "description": "My pizza description",
+      "contentSchema": "AndPizzaOrder",
+      "chainName": "&pizza"
+   }
+}

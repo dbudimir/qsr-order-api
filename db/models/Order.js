@@ -1,11 +1,11 @@
 const mongoose = require('../connection.js');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 const OrderSchema = new mongoose.Schema({
     timestamp: { type: String },
     userFullName: { type: String },
     orderName: { type: String },
     description: { type: String },
-    chainSchema: { type: String },
     chain: [
         {
             ref: 'Chain',
@@ -21,11 +21,15 @@ const OrderSchema = new mongoose.Schema({
     ],
     orderContent: [
         {
-            ref: this.chainSchema,
+            refPath: 'contentSchema',
             type: mongoose.Schema.Types.ObjectId,
         },
     ],
+    contentSchema: { type: String },
+    chainName: { type: String },
 });
+
+OrderSchema.plugin(deepPopulate);
 
 const Order = mongoose.model('Order', OrderSchema);
 

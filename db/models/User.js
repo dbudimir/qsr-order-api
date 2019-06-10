@@ -1,4 +1,5 @@
 const mongoose = require('../connection.js');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 const UserSchema = new mongoose.Schema({
     userFullName: { type: String },
@@ -10,6 +11,8 @@ const UserSchema = new mongoose.Schema({
         },
     ],
 });
+
+UserSchema.plugin(deepPopulate);
 
 const User = mongoose.model('User', UserSchema);
 

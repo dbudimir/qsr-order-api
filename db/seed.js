@@ -9,27 +9,22 @@ const AndPizzaOrder = require('./models/AndPizzaOrder.js');
 
 const Order = require('../db/models/Order.js');
 
-function matchOrders(chainContent, chainContentOrders) {
+function matchOrders(chainContent, chainContentOrders, chainSchemaName, currentChainName) {
     chainContent.find({}).deleteMany(() => {
         chainContent.insertMany(chainContentOrders).then(orders => {
             orders.forEach(order => {
                 Order.updateOne(
                     { timestamp: order.timestamp },
-                    { $push: { orderContent: order._id } },
+                    {
+                        $push: { orderContent: order._id },
+                        $set: { contentSchema: chainSchemaName, chainName: currentChainName },
+                    },
                     { upsert: true }
                 ).then(updatedOrder => updatedOrder);
             });
         });
     });
 }
-
-// AndPizzaOrder.find({}).deleteMany(() => {
-//     AndPizzaOrder.insertMany(andPizzaOrders).then(orders => {
-//         orders.forEach(order => {
-//             Order.updateOne({ timestamp: order.timestamp }, { $push: { orderContent: order._id } }, { upsert: true });
-//         });
-//     });
-// });
 
 function setValues(chainOrders, currentChain, allUsers) {
     Order.insertMany(chainOrders).then(orders => {
@@ -87,66 +82,14 @@ Chain.find({}).deleteMany(() => {
                     .deleteMany(() => {
                         const currentChain = allChains.filter(chain => chain.name === 'Chipotle');
                         setValues(chipotleOrders, currentChain, allUsers);
-                        matchOrders(ChipotleOrder, chipotleOrders);
+                        matchOrders(ChipotleOrder, chipotleOrders, 'ChipotleOrder', 'Chipotle');
                     })
                     .then(() => {
                         const currentChain = allChains.filter(chain => chain.name === '&pizza');
                         setValues(andPizzaOrders, currentChain, allUsers);
-                        matchOrders(AndPizzaOrder, andPizzaOrders);
+                        matchOrders(AndPizzaOrder, andPizzaOrders, 'AndPizzaOrder', '&pizza');
                     });
             });
         });
     });
 });
-
-// Chain.find({}).deleteMany(() => {
-//     Chain.insertMany(chains).then(allChains => {
-//         User.find({}).deleteMany(() => {
-//             User.insertMany(users).then(() => {
-//                 Order.find({}).deleteMany(() => {
-//                     Order.insertMany(chipotleOrders).then(() => {
-//                         ChipotleOrder.find({})
-//                             .deleteMany(() => {
-//                                 const currentChain = allChains.filter(chain => chain.name === 'Chipotle');
-//                                 Order.insertMany(chipotleOrders).then(myOrders => {
-//                                     myOrders.forEach(order => {
-//                                         currentChain[0].orders.push(order);
-//                                     });
-//                                     currentChain[0].save().then(() => {
-//                                         myOrders.forEach(order => {
-//                                             if (order.userFullName !== null) {
-//                                                 User.find({ userFullName: order.userFullName }).then(user => {
-//                                                     user[0].orders.push(order._id);
-//                                                     user[0].save();
-//                                                 });
-//                                             }
-//                                         });
-//                                     });
-//                                 });
-//                             })
-//                             .then(() => {
-//                                 AndPizzaOrder.deleteMany(() => {
-//                                     const currentChain = allChains.filter(chain => chain.name === '&pizza');
-//                                     Order.insertMany(andPizzaOrders).then(myOrders => {
-//                                         myOrders.forEach(order => {
-//                                             currentChain[0].orders.push(order);
-//                                         });
-//                                         currentChain[0].save().then(() => {
-//                                             myOrders.forEach(order => {
-//                                                 if (order.userFullName !== null) {
-//                                                     User.find({ userFullName: order.userFullName }).then(user => {
-//                                                         user[0].orders.push(order._id);
-//                                                         user[0].save();
-//                                                     });
-//                                                 }
-//                                             });
-//                                         });
-//                                     });
-//                                 });
-//                             });
-//                     });
-//                 });
-//             });
-//         });
-//     });
-// });

@@ -6,7 +6,7 @@ const AndPizzaOrderSchema = new mongoose.Schema({
     sauce: [],
     cheese: [],
     veggies: [],
-    proteins: [],
+    proteins: { type: Array },
     finishes: [],
 });
 

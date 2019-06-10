@@ -8,7 +8,7 @@ const ChainSchema = new mongoose.Schema({
     orders: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: this.orderSchema,
+            ref: 'Order',
         },
     ],
 });
