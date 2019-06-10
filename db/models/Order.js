@@ -35,6 +35,3 @@ OrderSchema.plugin(deepPopulate);
 const Order = mongoose.model('Order', OrderSchema);
 
 module.exports = Order;
-
-
-mongodb+srv://dbudi:Berrks^1bashers@cluster0-4i2eg.mongodb.net/
