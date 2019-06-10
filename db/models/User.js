@@ -1,4 +1,3 @@
-const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const mongoose = require('../connection.js');
 
 const UserSchema = new mongoose.Schema({
@@ -11,6 +10,8 @@ const UserSchema = new mongoose.Schema({
         },
     ],
 });
+
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 UserSchema.plugin(deepPopulate);
 

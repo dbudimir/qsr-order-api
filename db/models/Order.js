@@ -1,4 +1,3 @@
-const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const mongoose = require('../connection.js');
 
 const OrderSchema = new mongoose.Schema({
@@ -28,6 +27,8 @@ const OrderSchema = new mongoose.Schema({
     contentSchema: { type: String },
     chainName: { type: String },
 });
+
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 OrderSchema.plugin(deepPopulate);
 
