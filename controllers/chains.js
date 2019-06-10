@@ -6,11 +6,11 @@ const router = express.Router();
 // Gets all of the chains and order IDs
 router.get('/', (req, res) => {
     Chain.find({})
-        .populate({
-            path: 'orders',
-            model: 'Order',
-            populate: { path: 'orderContent', refPath: 'chainSchema' },
-        })
+        // .populate({
+        //     path: 'orders',
+        //     model: 'Order',
+        //     populate: { path: 'orderContent', refPath: 'chainSchema' },
+        // })
         .then(chains => res.json(chains));
 });
 

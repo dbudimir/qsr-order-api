@@ -25,8 +25,7 @@ router.get('/id/:id', async (req, res) => {
         .then(orders => res.json(orders));
 });
 
-// This function is redundant but it does make it possible to produce a result
-// based on criteria in a sub document.
+// Makes it possible to produce a result based on criteria in a sub document.
 router.get('/chain/nested/:name', async (req, res) => {
     const chainOrders = [];
     const results = [];
