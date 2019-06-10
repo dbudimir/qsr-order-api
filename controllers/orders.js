@@ -21,6 +21,7 @@ router.get('/chain/:name', async (req, res) => {
 
 router.get('/id/:id', async (req, res) => {
     Order.find({ _id: req.params.id })
+        .populate({ path: 'users' })
         .populate({ path: 'orderContent', refPath: 'chainSchema' })
         .then(orders => res.json(orders));
 });

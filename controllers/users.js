@@ -16,8 +16,8 @@ router.get('/all', (req, res) => {
 });
 
 // Gets a specific user by name with orders
-router.get('/:userFullName', (req, res) => {
-    User.find({ userFullName: req.params.userFullName })
+router.get('/:id', async (req, res) => {
+    User.find({ _id: req.params.id })
         .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
         .then(allUsers => res.json(allUsers));
 });
