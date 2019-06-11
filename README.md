@@ -118,6 +118,13 @@ With better deep queries we could analyze an order as it comes in and applies ne
 
 With some effort, tags could be applied by users as a way to curate a "playlist" of custom orders.
 
+**Watch Video**
+
+<a href="https://www.youtube.com/watch?v=qSgGKrP4owg
+" target="_blank"><img src="http://img.youtube.com/vi/qSgGKrP4owg/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
+
 ### **Technologies Used**
 
 **Javascript**
