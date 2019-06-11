@@ -1,6 +1,6 @@
 ## QSR Custom Order API
 
-This API is designed to store and edit data related to a user's customized order at quick service restaurants (QSR) like Chipotle and &pizza. The goal of the API is to offer a queryable data set into popular orders at a given restaurant chain, orders by users(s), and deep queries into the ingredients that make up a users custom order.
+This API is designed to store and edit data related to a user's customized order at quick service restaurants (QSR) like Chipotle and &pizza. The goal of the API is to offer a queryable data set into popular orders at a given restaurant chain, orders by users, and deep queries into the ingredients that make up a users custom order.
 
 For example, we could query the database (based on ingredients) to determine all the custom orders at Chipotle that are vegan or vegetarian-friendly. An end user could use this information to make diet conscious choices at their favorite restaurants.
 
