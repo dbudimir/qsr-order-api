@@ -155,4 +155,4 @@ Fork and clone this repo, contribute from a new branch.
 -  Main repository: [https://github.com/dbudimir/qsr-order-api](https://github.com/dbudimir/qsr-order-api)
 -  Issue tracker: [https://github.com/dbudimir/qsr-order-api/issues](https://github.com/dbudimir/qsr-order-api)
 
-Contact me: [dav.budimir@gmail.com](mailto:dav.budimir@gmail.com)
+Contact me: [dav.budimir@gmail.com](mailto:dav.budimir@gmail.com) 
