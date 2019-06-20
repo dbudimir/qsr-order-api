@@ -2,7 +2,9 @@ const mongoose = require('../connection.js');
 
 const UserSchema = new mongoose.Schema({
     userFullName: { type: String },
+    userName: { type: String, index: { unique: true } },
     email: { type: String },
+    password: { type: String },
     orders: [
         {
             ref: 'Order',
