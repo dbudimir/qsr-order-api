@@ -11,7 +11,7 @@ secretKey = makeid = () => {
 // console.log(makeid());
 
 module.exports = {
-   jwtSecret: 'secretKey',
+   jwtSecret: secretKey,
    jwtSession: {
       session: false
    }
