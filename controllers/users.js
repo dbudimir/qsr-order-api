@@ -26,13 +26,6 @@ router.get('/:id', async (req, res) => {
         .then(allUsers => res.json(allUsers));
 });
 
-// Gets a specific user by email with orders
-router.get('/:email', async (req, res) => {
-    User.find({ email: req.params.email })
-        .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
-        .then(allUsers => res.json(allUsers));
-});
-
 // Create a usr with the info below.
 router.post('/create/:userFullName', (req, res) => {
     const newUser = JSON.parse(`{ "userFullName":"${req.params.userFullName}" }`);
@@ -86,7 +79,8 @@ router.post('/login', (req, res) => {
                     }
                     var token = jwt.encode(payload, config.jwtSecret)
                     res.json({
-                        token: token
+                        token: token,
+                        userId: user._id
                     })
                 } else {
                     res.sendStatus(401)
