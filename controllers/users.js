@@ -34,7 +34,7 @@ router.post('/create/:userFullName', (req, res) => {
     });
 });
 
-// Creates a new user with auth
+// Creates a new user 
 router.post('/signup', (req, res) => {
     if (req.body.email && req.body.password) {
         let newUser = {
@@ -52,8 +52,10 @@ router.post('/signup', (req, res) => {
                                 }
                                 var token = jwt.encode(payload, config.jwtSecret)
                                 res.json({
-                                    token: token
+                                    token: token,
+                                    userId: user._id
                                 })
+
                             } else {
                                 res.sendStatus(401)
                             }
