@@ -19,9 +19,16 @@ router.get('/all', (req, res) => {
         .then(allUsers => res.json(allUsers));
 });
 
-// Gets a specific user by name with orders
+// Gets a specific user by ID with orders
 router.get('/:id', async (req, res) => {
     User.find({ _id: req.params.id })
+        .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
+        .then(allUsers => res.json(allUsers));
+});
+
+// Gets a specific user by email with orders
+router.get('/:email', async (req, res) => {
+    User.find({ email: req.params.email })
         .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
         .then(allUsers => res.json(allUsers));
 });

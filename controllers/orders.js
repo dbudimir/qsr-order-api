@@ -19,6 +19,7 @@ router.get('/chain/:name', async (req, res) => {
         .then(orders => res.json(orders));
 });
 
+// Gets a specific order by ID
 router.get('/id/:id', async (req, res) => {
     Order.find({ _id: req.params.id })
         .populate({ path: 'users' })
@@ -30,8 +31,8 @@ router.get('/id/:id', async (req, res) => {
 router.get('/chain-nested/:name', async (req, res) => {
     const chainOrders = [];
     const results = [];
-    await Order.find({}, function(err, data) {
-        data.forEach(function(value) {
+    await Order.find({}, function (err, data) {
+        data.forEach(function (value) {
             chainOrders.push(value);
         });
     })
@@ -49,8 +50,8 @@ router.get('/chain-nested/:name', async (req, res) => {
 router.get('/beans/:beans', async (req, res) => {
     const chainOrders = [];
     const results = [];
-    await Order.find({}, function(err, data) {
-        data.forEach(function(value) {
+    await Order.find({}, function (err, data) {
+        data.forEach(function (value) {
             chainOrders.push(value);
         });
     })
