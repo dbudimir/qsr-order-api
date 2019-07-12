@@ -1,6 +1,6 @@
 ## QSR Custom Order API
 
-This API is designed to store and edit data related to a user's customized order at quick service restaurants (QSR) like Chipotle and &pizza. The goal of the API is to offer a queryable data set into popular orders at a given restaurant chain, orders by users(s), and deep queries into the ingredients that make up a users custom order.
+This API is designed to store and edit data related to a user's customized order at quick service restaurants (QSR) like Chipotle and &pizza. The goal of the API is to offer a queryable data set into popular orders at a given restaurant chain, orders by users, and deep queries into the ingredients that make up a users custom order.
 
 For example, we could query the database (based on ingredients) to determine all the custom orders at Chipotle that are vegan or vegetarian-friendly. An end user could use this information to make diet conscious choices at their favorite restaurants.
 
@@ -23,26 +23,21 @@ With the exception of "Chain", the data model used to manage individual restaura
 
 **Chains (Restaurants)**
 
-GET: [https://qsr-order-api.herokuapp.com/api/chains/](https://qsr-order-api.herokuapp.com/api/chains/)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/chains/](https://qsr-order-api.herokuapp.com/api/chains/)**
 Returns a list of Chains and the Order IDs for custom orders made at that chain.
 
-GET: [https://qsr-order-api.herokuapp.com/api/chains/:chainName](https://qsr-order-api.herokuapp.com/api/chains/Chipotle)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/chains/:chainName](https://qsr-order-api.herokuapp.com/api/chains/Chipotle)**
 Returns a list of orders a given chain, and also includes order metadata. Such as the user that placed the order and the content of the orders (ingredients).
 
 **Orders**
 
-GET: [https://qsr-order-api.herokuapp.com/api/orders/](https://qsr-order-api.herokuapp.com/api/orders/)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/orders/](https://qsr-order-api.herokuapp.com/api/orders/)**
 A complete list of orders in the database, including all order metadata.
 
-GET: [https://qsr-order-api.herokuapp.com/api/orders/chain/:chainName](https://qsr-order-api.herokuapp.com/api/orders/chain/Chipotle)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/orders/chain/:chainName](https://qsr-order-api.herokuapp.com/api/orders/chain/Chipotle)**
 A complete list of orders related to a specific chain.
 
-GET: [https://qsr-order-api.herokuapp.com/api/orders/beans/:typeOfIngredient](https://qsr-order-api.herokuapp.com/api/orders/beans/Black%20Beans)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/orders/beans/:typeOfIngredient](https://qsr-order-api.herokuapp.com/api/orders/beans/Black%20Beans)**
 This request makes it possible to query inside of a subdocument. First, it populates all the information available to use inside of an order. Then it identifies when the order ingredients (in this case, beans) match the query value. Then it pushes those results into JSON as the result.
 
 ```
@@ -67,22 +62,18 @@ router.get('/beans/:beans',  async  (req, res)  =>  {
 
 **Users**
 
-GET: [https://qsr-order-api.herokuapp.com/api/users/all](https://qsr-order-api.herokuapp.com/api/users/all)
-
+**GET: [https://qsr-order-api.herokuapp.com/api/users/all](https://qsr-order-api.herokuapp.com/api/users/all)**
 Gets all users and populates their order metadata.
 
-POST: [https://qsr-order-api.herokuapp.com/api/users/create/:userFullName](https://qsr-order-api.herokuapp.com/api/users/create/David%20Budimir)
-
+**POST: [https://qsr-order-api.herokuapp.com/api/users/create/:userFullName](https://qsr-order-api.herokuapp.com/api/users/create/David%20Budimir)**
 Creates a new user with their full name.
 
-DELETE: [https://qsr-order-api.herokuapp.com/api/users/create/:userFullName](https://qsr-order-api.herokuapp.com/api/users/create/David%20Budimir)
-
+**DELETE: [https://qsr-order-api.herokuapp.com/api/users/create/:userFullName](https://qsr-order-api.herokuapp.com/api/users/create/David%20Budimir)**
 Deletes a selected user based on the provided full name.
 
 **User Orders**
 
-POST: https://qsr-order-api.herokuapp.com/api/user-order/create/
-
+**POST: https://qsr-order-api.herokuapp.com/api/user-order/create/**
 This is an additional controller that was set up to simulate an ideal post to the database if a user was to submit an order for the first time. In this route, we simultaneously create a user and an order.
 
 Then the function dynamically imports the "Order Content" model based on the name of the user's selected restaurant. Finally, the "Order Content" is updated the "Order" gets associated with the corresponding IDs for "Order Content", "User", and "Chain". As a result, we can reliably use the nested query routes described earlier.
@@ -127,6 +118,13 @@ With better deep queries we could analyze an order as it comes in and applies ne
 
 With some effort, tags could be applied by users as a way to curate a "playlist" of custom orders.
 
+**Watch Video**
+
+<a href="https://www.youtube.com/watch?v=qSgGKrP4owg
+" target="_blank"><img src="http://img.youtube.com/vi/qSgGKrP4owg/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="520" height="360"  /></a>
+
+
 ### **Technologies Used**
 
 **Javascript**
@@ -164,4 +162,4 @@ Fork and clone this repo, contribute from a new branch.
 -  Main repository: [https://github.com/dbudimir/qsr-order-api](https://github.com/dbudimir/qsr-order-api)
 -  Issue tracker: [https://github.com/dbudimir/qsr-order-api/issues](https://github.com/dbudimir/qsr-order-api)
 
-Contact me: [dav.budimir@gmail.com](mailto:dav.budimir@gmail.com)
+Contact me: [dav.budimir@gmail.com](mailto:dav.budimir@gmail.com)  
