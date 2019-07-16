@@ -38,6 +38,8 @@ router.post('/create/:userFullName', (req, res) => {
 router.post('/signup', (req, res) => {
 	if (req.body.email && req.body.password) {
 		let newUser = {
+			userFullName: req.body.userFullName,
+			userName: req.body.userName,
 			email: req.body.email,
 			password: req.body.password,
 		};
