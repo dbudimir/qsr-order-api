@@ -43,7 +43,8 @@ router.post('/signup', (req, res) => {
 			email: req.body.email,
 			password: req.body.password,
 		};
-		User.findOne({ email: req.body.email }).then(user => {
+
+		User.findOne({ $or: [{ email: req.body.email }, { userName: req.body.userName }] }).then(user => {
 			if (!user) {
 				User.create(newUser).then(user => {
 					if (user) {
