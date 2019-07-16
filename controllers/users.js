@@ -55,6 +55,8 @@ router.post('/signup', (req, res) => {
 						res.json({
 							token: token,
 							userId: user._id,
+							userFullName: user.userFullName,
+							userName: user.userName,
 						});
 					} else {
 						res.sendStatus(401);
