@@ -30,7 +30,7 @@ router.post('/create/order', async (req, res) => {
 // Find an existing user and create a new order.
 router.post('/create/existing-user', async (req, res) => {
 	// Start the function
-	User.findById(req.body.userId).then(foundUser => {
+	User.findOne({ _id: req.body.userId }).then(foundUser => {
 		Order.create(req.body.order).then(createdOrder => {
 			const OrderContent = require(`../db/models/${createdOrder.contentSchema}.js`);
 			OrderContent.create(req.body.order).then(async createdOrderContent => {
