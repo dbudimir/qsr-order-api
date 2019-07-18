@@ -27,6 +27,22 @@ router.get('/id/:id', async (req, res) => {
 		.then(orders => res.json(orders));
 });
 
+// Finds all orders with a specific tag
+router.get('/tag/:tag', async (req, res) => {
+	Order.find({ tags: req.params.tag })
+		.populate({ path: 'users' })
+		.populate({ path: 'orderContent', refPath: 'chainSchema' })
+		.then(orders => res.json(orders));
+});
+
+// Finds all orders with a specific tag at a specifc chain
+router.get('/chain/:chain/:tag', async (req, res) => {
+	Order.find({ $and: [{ chainName: req.params.chain }, { tags: req.params.tag }] })
+		.populate({ path: 'users' })
+		.populate({ path: 'orderContent', refPath: 'chainSchema' })
+		.then(orders => res.json(orders));
+});
+
 // Makes it possible to produce a result based on criteria in a sub document.
 router.get('/chain-nested/:name', async (req, res) => {
 	const chainOrders = [];
