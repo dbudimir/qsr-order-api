@@ -5,6 +5,7 @@ const OrderSchema = new mongoose.Schema(
 		userFullName: { type: String },
 		orderName: { type: String },
 		description: { type: String },
+		tags: [],
 		chain: [
 			{
 				ref: 'Chain',
