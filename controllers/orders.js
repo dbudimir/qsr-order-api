@@ -45,10 +45,15 @@ router.get('/chain/:chain/:tag', async (req, res) => {
 
 // Finds all orders that have tags
 router.get('/tags', async (req, res) => {
-	Order.find({ tags: { $gt: [] } })
-		.populate({ path: 'tags' })
-		.then(orders => res.json(orders));
+	Order.find({ tags: { $exists: true }, $where: 'this.tags.length>0' })
+	.then(order => res.json(order[0]));
 });
+
+// Order.find({ tagsLength: { $gt: 0 } }, function(err, docs) {});
+// 		.populate({ path: 'tags' })
+// 		.populate({ path: 'orderContent', refPath: 'chainSchema' })
+// 		.then(orders => res.json(orders));
+// });
 
 // Makes it possible to produce a result based on criteria in a sub document.
 router.get('/chain-nested/:name', async (req, res) => {
