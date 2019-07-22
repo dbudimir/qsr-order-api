@@ -45,7 +45,10 @@ router.get('/chain/:chain/:tag', async (req, res) => {
 
 // Finds all orders that have tags
 router.get('/tags', async (req, res) => {
-	Order.find({ tags: { $exists: true }, $where: 'this.tags.length>0' }).then(order => res.json(order));
+	Order.find({ tags: { $exists: true }, $where: 'this.tags.length>0' })
+		.populate({ path: 'users' })
+		.populate({ path: 'orderContent', refPath: 'chainSchema' })
+		.then(order => res.json(order));
 });
 
 // Makes it possible to produce a result based on criteria in a sub document.
