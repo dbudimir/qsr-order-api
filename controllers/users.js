@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const jwt = require('jwt-simple');
-const passport = require('../config/passport');
+// const jwt = require('jwt-simple');
+// const passport = require('../config/passport');
 
 const User = require('../db/models/User.js');
 
@@ -53,9 +53,7 @@ router.post('/login', async (req, res) => {
     if (!bcrypt.compareSync(req.body.password, user.password)) {
       return res.status(400).send({ message: 'The password is invalid' });
     }
-    //  var token = jwt.encode(payload, config.jwtSecret);
     res.json({
-      // token: token,
       userId: user._id,
       userFullName: user.userFullName,
       userName: user.userName
@@ -76,33 +74,33 @@ router.get('/dump', async (req, res) => {
   }
 });
 
-// Allows an existing user to log in
-router.post('/login', (req, res) => {
-  if (req.body.email && req.body.password) {
-    User.findOne({ email: req.body.email }).then(user => {
-      if (user) {
-        if (user.password === req.body.password) {
-          var payload = {
-            id: user.id
-          };
-          var token = jwt.encode(payload, config.jwtSecret);
-          res.json({
-            token: token,
-            userId: user._id,
-            userFullName: user.userFullName,
-            userName: user.userName
-          });
-        } else {
-          res.sendStatus(401);
-        }
-      } else {
-        res.sendStatus(401);
-      }
-    });
-  } else {
-    res.sendStatus(401);
-  }
-});
+// // Allows an existing user to log in
+// router.post('/login', (req, res) => {
+//   if (req.body.email && req.body.password) {
+//     User.findOne({ email: req.body.email }).then(user => {
+//       if (user) {
+//         if (user.password === req.body.password) {
+//           var payload = {
+//             id: user.id
+//           };
+//           var token = jwt.encode(payload, config.jwtSecret);
+//           res.json({
+//             token: token,
+//             userId: user._id,
+//             userFullName: user.userFullName,
+//             userName: user.userName
+//           });
+//         } else {
+//           res.sendStatus(401);
+//         }
+//       } else {
+//         res.sendStatus(401);
+//       }
+//     });
+//   } else {
+//     res.sendStatus(401);
+//   }
+// });
 
 // Delete a user by name
 router.delete('/delete/:userFullName', (req, res) => {

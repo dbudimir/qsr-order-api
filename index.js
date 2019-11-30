@@ -1,8 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const cors = require('cors');
-const bcrypt = require('bcryptjs');
-const passport = require('./config/passport')();
+// const passport = require('./config/passport')();
 const chainController = require('./controllers/chains');
 const orderController = require('./controllers/orders.js');
 const userController = require('./controllers/users.js');
@@ -16,7 +15,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
 app.use(cors());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 app.use('/api/chains/', chainController);
 app.use('/api/orders/', orderController);
