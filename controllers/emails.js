@@ -82,25 +82,24 @@ router.post('/confirm-token', async (req, res) => {
       res.json({ message: 'The user does not exist' });
     }
     const expiration = new Date(user.resetPasswordExpires).getTime();
-    //  if (expiration > Date.now()) {
-    console.log('all good');
-    // Update new password for user
-    let password = req.body.newPassword.password;
-    password = bcrypt.hashSync(password, 10);
-    await user.updateOne({
-      password: password
-    });
-    res.json({
-      userId: user._id,
-      userFullName: user.userFullName,
-      email: user.email,
-      userName: user.userName
-    });
-    //   }
-    //   res.json({ message: 'This password reset link has expired' });
 
-    console.log(expiration);
-    console.log(Date.now());
+    // Need to check the password reset token has not expired
+    if (expiration > Date.now()) {
+      console.log('all good');
+      // Update new password for user
+      let password = req.body.newPassword.password;
+      password = bcrypt.hashSync(password, 10);
+      await user.updateOne({
+        password: password
+      });
+      res.json({
+        userId: user._id,
+        userFullName: user.userFullName,
+        email: user.email,
+        userName: user.userName
+      });
+    }
+    res.json({ message: 'This password reset link has expired' });
   } catch (err) {
     res.status(500).send(err);
   }
