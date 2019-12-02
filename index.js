@@ -1,11 +1,16 @@
 const express = require('express');
 const parser = require('body-parser');
 const cors = require('cors');
-// const passport = require('./config/passport')();
+const bcrypt = require('bcryptjs');
+
 const chainController = require('./controllers/chains');
 const orderController = require('./controllers/orders.js');
 const userController = require('./controllers/users.js');
 const userOrderController = require('./controllers/user-orders.js');
+const emailController = require('./controllers/emails.js');
+
+const UserSchema = require('./db/models/User');
+
 require('./db/models/ChipotleOrder');
 require('./db/models/AndPizzaOrder');
 
@@ -15,12 +20,12 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
 app.use(cors());
-// app.use(passport.initialize());
 
 app.use('/api/chains/', chainController);
 app.use('/api/orders/', orderController);
 app.use('/api/users/', userController);
 app.use('/api/user-order/', userOrderController);
+app.use('/api/email/', emailController);
 
 app.get('/', (req, res) => {
   res.redirect('/api/chains/');

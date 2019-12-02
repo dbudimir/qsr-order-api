@@ -1,6 +1,7 @@
 const mongoose = require('../connection.js');
 const bcrypt = require('bcryptjs');
 const uniqueValidator = require('mongoose-unique-validator');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 const UserSchema = new mongoose.Schema(
   {
@@ -13,14 +14,15 @@ const UserSchema = new mongoose.Schema(
         ref: 'Order',
         type: mongoose.Schema.Types.ObjectId
       }
-    ]
+    ],
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date }
   },
   {
     timestamps: true
   }
 );
 
-const deepPopulate = require('mongoose-deep-populate')(mongoose);
 UserSchema.plugin(deepPopulate);
 UserSchema.plugin(uniqueValidator);
 
@@ -31,7 +33,8 @@ UserSchema.pre('save', function(next) {
   this.password = bcrypt.hashSync(this.password, 10);
   next();
 });
-UserSchema.methods.comparePassword = function(plaintext, callback) {
+
+UserSchema.comparePassword = function(plaintext, callback) {
   return callback(null, bcrypt.compareSync(plaintext, this.password));
 };
 
