@@ -43,13 +43,22 @@ router.post('/signup', async (req, res) => {
 
 // Exisitng User Login
 router.post('/login', async (req, res) => {
+  console.log(req.body);
   try {
     var user = await User.findOne({ email: req.body.email }).exec();
     if (!user) {
-      return res.status(400).send({ message: 'The email does not exist' });
+      res.send({
+        message: 'The email does not exist',
+        emailMatch: false
+      });
+      return res.status(400);
     }
     if (!bcrypt.compareSync(req.body.password, user.password)) {
-      return res.status(400).send({ message: 'The password is invalid' });
+      res.send({
+        message: 'The password is invalid',
+        passwordMatch: false
+      });
+      return res.status(400);
     }
     res.json({
       userId: user._id,
@@ -73,8 +82,8 @@ router.get('/dump', async (req, res) => {
 });
 
 // Delete a user by name
-router.delete('/delete/:userFullName', (req, res) => {
-  User.findOneAndDelete({ userFullName: req.params.userFullName }).then(deleted => {
+router.delete('/delete/:email', (req, res) => {
+  User.findOneAndDelete({ email: req.params.email }).then(deleted => {
     res.json(deleted);
   });
 });

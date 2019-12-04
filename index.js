@@ -9,8 +9,6 @@ const userController = require('./controllers/users.js');
 const userOrderController = require('./controllers/user-orders.js');
 const emailController = require('./controllers/emails.js');
 
-const UserSchema = require('./db/models/User');
-
 require('./db/models/ChipotleOrder');
 require('./db/models/AndPizzaOrder');
 
