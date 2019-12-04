@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mealdig-email-service",
+  "private_key_id": "a94c529aff59041714f9b1751215080e842f8bf3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbdFNr6U0EmM4b\nDMOj+T6C6yt+s5U7aYXYP6hSac7erBqCHeAIGHqgpdRwTHiN4IxKIJ37hDVMZwFp\n3ulX7o5xfgt5XzqyhNIXQbbxsKGdlaYvpzB0lKdRDxs7S+HNS4RItTz1+GcjR7F7\noN+LGF4dBeOG9HFSTGDGEYKn3rIhYM0Ji+yoEKyI+tuevQiGKw7trEag2+5zomb3\nG+7fyB2x+MkzbzaD0faZ+eEvIbeomvs6FujnopIfRDrrtOqpciAPnjxZcrLCvMO2\n6l7csOYRic+NkFhWZ7Tdu1iUWr/YJ9dsYPS/je5iIr/jjNWv+uVhU51EV4N0ZmKz\nQCHx1X19AgMBAAECggEAKoaddssYI2SoBepgjAkr0atYO555s/BkIS5exA+gaJqB\nrYa0B+WUd8aCxvsunlGt5dxxuNBbErHgPn+ViLZf8IK8Hvoy8e6Wlq6jkKzJeLPL\n5y6XD3RSAv1yKbiv6jwwx3UlecW32MiXDk2zm+zuKeIe/+MlBY1q8F7qynR3YMuZ\nAjnLnBAu+y8w9bqvPpmoZFmeT2XuWchLCZL9rOsTUyqWIXSo/oQbcgKX52J8IQPe\nG/6EYgJBy1cJH3KiSfOO86kh29KZbvZMy9lWd735kUa76YcsHka9WB4v/4+wglU2\nOr15/DWbnwFPo//gnr0Em00yZLs7d+OzaSjMeauXAQKBgQD+HFFrIaDy3BEuySN2\noqvwfofGDR5RwWQyZniUjruT/hc7TPQe+BwanSHfuB7muh99r0hW5gvE/EWLJ7NN\ntXb7GwjIEujoUY5y3AeWz0kFVLxLYGnn24HsAqJlLEFNl3BQb8M6utJT/M3UbSFS\nA/LfFrb5+W8lEnZgI6U78dAHAQKBgQDdFgrHzGDbo5tAx5jqT3v5cwcecXUUO7Oi\nNh5bLiAcgKgaeG2WUz24GrJh/cda7B0ouxE+t+d3jzxru6+dvMwAh97k3PzGt3oQ\nXfHT9YKADNvYQnm5Rrd9VlT+ZdKj7Sh15h7t1eoOKQVNpTS/fkKWGfRoB6dHqDrM\nvLlo4sQSfQKBgQD706yMcwNCKv2MVCElDQlAiOSdTZrigrl9iTeuYdVbUNBNIHI9\nzrxrU5WiVKGrHoDe2brjA5BeY3O3+FwlgtSq/ZuyS6stsMVu5sdOmZZQBi2ktaO+\n9zbGYcX2ZelBr/bKgDgGF+cg/MQu5QfEc81ZcPVcvel739QYarrxsS7sAQKBgHPG\n5z5aOR7MPrFd1SZfGX04T7IRmE5QNXHtBViafxZuCZpTFpByZw/SazgFvjBPFbYO\nwKknhX+G8w037G+ePvbIMGGJmJY33yRTDiEBoKWOFlLZ/QSZk91/KGNQz04pE9cp\n+2hxbXCc6roOmeDuLdCNJwCTgXZ1EtXEvxO+LQ/BAoGAcQbLRe/vYbg7vDV0p0hO\nLmRiolhSg7/3QgYvqXTZULeOjXfL7WVPX/Mgp7yaoEvg5pmtBX2IxK2QT3FDSQoV\n07TVy5a2mxavnHOvzwQIjqqW8a/IdsE5w+A0UdWJpYMMVk9xIExUqhyXHtERAaSZ\nXUxA/IUUpl9uq1abZ3jSTHk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "user-emails@mealdig-email-service.iam.gserviceaccount.com",
+  "client_id": "101697253181923663452",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/user-emails%40mealdig-email-service.iam.gserviceaccount.com"
+}
