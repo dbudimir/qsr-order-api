@@ -15,6 +15,12 @@ const UserSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId
       }
     ],
+    favorites: [
+      {
+        ref: 'Order',
+        type: mongoose.Schema.Types.ObjectId
+      }
+    ],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date }
   },
