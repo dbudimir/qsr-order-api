@@ -90,8 +90,9 @@ router.get('/beans/:beans', async (req, res) => {
   res.send(results);
 });
 
-// Increments favorite count on selected orrder and adds favorite to User
+// Increments favorite count on selected order and adds favorite to User
 router.post('/favorite', async (req, res) => {
+  console.log(req.body);
   try {
     let result = {
       order: Order.updateOne(
@@ -103,15 +104,15 @@ router.post('/favorite', async (req, res) => {
         { $addToSet: { favorites: req.body.orderId } }
       ).exec()
     };
-
     res.send(result);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-// Decrement favorite count on selected orrder removes favorite from user
+// Decrement favorite count on selected order removes favorite from user
 router.post('/unfavorite', async (req, res) => {
+  console.log(req.body);
   try {
     let result = {
       order: Order.updateOne(
@@ -123,7 +124,6 @@ router.post('/unfavorite', async (req, res) => {
         { $pullAll: { favorites: req.body.orderId } }
       ).exec()
     };
-    console.log(result);
     res.send(result);
   } catch (error) {
     res.status(500).send(error);

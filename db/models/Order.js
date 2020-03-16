@@ -6,7 +6,7 @@ const OrderSchema = new mongoose.Schema(
     orderName: { type: String },
     description: { type: String },
     tags: [],
-    favoriteCount: { type: Number, default: 0 },
+    favoriteCount: { type: Number, default: 0, minimum: 0 },
     chain: [
       {
         ref: 'Chain',
