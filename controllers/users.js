@@ -15,8 +15,15 @@ router.get('/all', (req, res) => {
   User.find({}).deepPopulate(['orders']).then(allUsers => res.json(allUsers));
 });
 
+// Gets a specific user by user name with orders
+router.get('/:userName', async (req, res) => {
+  User.find({ userName: req.params.userName })
+    .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
+    .then(allUsers => res.json(allUsers));
+});
+
 // Gets a specific user by ID with orders
-router.get('/:id', async (req, res) => {
+router.get('/id/:id', async (req, res) => {
   User.find({ _id: req.params.id })
     .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
     .then(allUsers => res.json(allUsers));
