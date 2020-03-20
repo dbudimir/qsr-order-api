@@ -35,7 +35,13 @@ router.get('/id/:id', async (req, res) => {
 router.post('/update-user', async (req, res) => {
   User.findOneAndUpdate(
     { _id: req.body._id },
-    { $set: { userName: req.body.userName } }
+    {
+      $set: {
+        userFullName: req.body.userFullName,
+        userName: req.body.userName,
+        emai: req.body.email
+      }
+    }
   ).then(updatedUser => {
     console.log(req.body);
     res.json(updatedUser);
