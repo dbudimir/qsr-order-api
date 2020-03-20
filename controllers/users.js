@@ -19,7 +19,9 @@ router.get('/all', (req, res) => {
 router.get('/:userName', async (req, res) => {
   User.find({ userName: req.params.userName })
     .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
-    .then(allUsers => res.json(allUsers));
+    .then(user => {
+      res.json(user);
+    });
 });
 
 // Gets a specific user by ID with orders
@@ -27,6 +29,17 @@ router.get('/id/:id', async (req, res) => {
   User.find({ _id: req.params.id })
     .populate({ path: 'orders', refPath: 'chainSchema', populate: { path: 'orderContent' } })
     .then(allUsers => res.json(allUsers));
+});
+
+// Updates the user
+router.post('/update-user', async (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.body._id },
+    { $set: { userName: req.body.userName } }
+  ).then(updatedUser => {
+    console.log(req.body);
+    res.json(updatedUser);
+  });
 });
 
 // Create a user with the info below.

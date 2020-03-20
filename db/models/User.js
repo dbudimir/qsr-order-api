@@ -6,7 +6,7 @@ const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const UserSchema = new mongoose.Schema(
   {
     userFullName: { type: String },
-    userName: { type: String, required: true, unique: true },
+    userName: { type: String, required: true, unique: true, maxlength: 20 },
     email: { type: String, index: true, unique: true, required: true },
     password: { type: String },
     orders: [
