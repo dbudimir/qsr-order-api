@@ -39,11 +39,11 @@ router.post('/update-user', async (req, res) => {
       $set: {
         userFullName: req.body.userFullName,
         userName: req.body.userName,
-        emai: req.body.email
+        email: req.body.email,
+        accessLevel: req.body.accessLevel
       }
     }
   ).then(updatedUser => {
-    console.log(req.body);
     res.json(updatedUser);
   });
 });
@@ -69,7 +69,6 @@ router.post('/signup', async (req, res) => {
 
 // Exisitng User Login
 router.post('/login', async (req, res) => {
-  console.log(req.body);
   try {
     var user = await User.findOne({ email: req.body.email }).exec();
     if (!user) {
@@ -89,7 +88,9 @@ router.post('/login', async (req, res) => {
     res.json({
       userId: user._id,
       userFullName: user.userFullName,
-      userName: user.userName
+      userName: user.userName,
+      email: user.email,
+      accessLevel: user.accessLevel
     });
     res.send({ message: 'The email and password combination is correct!' });
   } catch (error) {

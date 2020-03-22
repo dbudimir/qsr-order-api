@@ -130,4 +130,12 @@ router.post('/unfavorite', async (req, res) => {
   }
 });
 
+// Delete an order by Id
+router.delete('/delete/:id', (req, res) => {
+  console.log(req.params.id);
+  Order.findOneAndDelete({ _id: req.params.id }).then(deleted => {
+    res.json(deleted);
+  });
+});
+
 module.exports = router;
