@@ -94,7 +94,7 @@ router.get('/beans/:beans', async (req, res) => {
 router.post('/favorite', async (req, res) => {
   console.log(req.body);
   try {
-    let result = {
+    const result = {
       order: Order.updateOne(
         { _id: req.body.orderId },
         { $inc: { favoriteCount: 1 }, $addToSet: { usersFavorited: req.body.userId } }
@@ -102,7 +102,7 @@ router.post('/favorite', async (req, res) => {
       user: User.updateOne(
         { _id: req.body.userId },
         { $addToSet: { favorites: req.body.orderId } }
-      ).exec()
+      ).exec(),
     };
     res.send(result);
   } catch (error) {
@@ -114,7 +114,7 @@ router.post('/favorite', async (req, res) => {
 router.post('/unfavorite', async (req, res) => {
   console.log(req.body);
   try {
-    let result = {
+    const result = {
       order: Order.updateOne(
         { _id: req.body.orderId },
         { $inc: { favoriteCount: -1 }, $pull: { usersFavorited: req.body.userId } }
@@ -122,7 +122,7 @@ router.post('/unfavorite', async (req, res) => {
       user: User.updateOne(
         { _id: req.body.userId },
         { $pullAll: { favorites: req.body.orderId } }
-      ).exec()
+      ).exec(),
     };
     res.send(result);
   } catch (error) {

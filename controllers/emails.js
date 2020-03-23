@@ -11,7 +11,7 @@ const router = express.Router();
 // Identify if email is already in database
 router.post('/', async (req, res) => {
   try {
-    var user = await User.findOne({ email: req.body.email }).exec();
+    const user = await User.findOne({ email: req.body.email }).exec();
     if (!user) {
       // When this message is sent the client will know to throw an error.
       res.json({ message: 'The email does not exist' });
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
     const token = crypto.randomBytes(20).toString('hex');
     await user.updateOne({
       resetPasswordToken: token,
-      resetPasswordExpires: Date.now() + 360000
+      resetPasswordExpires: Date.now() + 360000,
     });
     // Send updated user data back to client
     res.json({
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
       email: user.email,
       userName: user.userName,
       resetPasswordToken: token,
-      resetPasswordExpires: Date.now() + 360000
+      resetPasswordExpires: Date.now() + 360000,
     });
   } catch (err) {
     res.status(500).send(err);
@@ -38,13 +38,14 @@ router.post('/', async (req, res) => {
 
 // Send password reset email
 router.post('/send', async function(req, res, next) {
-  let userData = req.body.data;
+  const userData = req.body.data;
 
   // Just doing something silly
   let resetURL = 'http://localhost:3000/reset-password?=';
   if (userData.location !== 'http://localhost:8040') {
     resetURL = 'https://mealdig.com/reset-password/?=';
   }
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -53,8 +54,8 @@ router.post('/send', async function(req, res, next) {
       type: 'Oauth2',
       user: 'david@mealdig.com',
       serviceClient: key.client_id,
-      privateKey: key.private_key
-    }
+      privateKey: key.private_key,
+    },
   });
   try {
     await transporter.verify();
@@ -76,8 +77,10 @@ router.post('/send', async function(req, res, next) {
 
 // Identify if password reset token is valid
 router.post('/confirm-token', async (req, res) => {
+  console.log(req.body.newPassword.token);
+  console.log(req.body.newPassword.password);
   try {
-    var user = await User.findOne({ resetPasswordToken: req.body.newPassword.token }).exec();
+    const user = await User.findOne({ resetPasswordToken: req.body.newPassword.token }).exec();
     if (!user) {
       res.json({ message: 'The user does not exist' });
     }
@@ -85,18 +88,16 @@ router.post('/confirm-token', async (req, res) => {
 
     // Need to check the password reset token has not expired
     if (expiration > Date.now()) {
-      console.log('all good');
       // Update new password for user
-      let password = req.body.newPassword.password;
-      password = bcrypt.hashSync(password, 10);
+      const password = bcrypt.hashSync(req.body.newPassword.password, 10);
       await user.updateOne({
-        password: password
+        password,
       });
       res.json({
         userId: user._id,
         userFullName: user.userFullName,
         email: user.email,
-        userName: user.userName
+        userName: user.userName,
       });
     }
     res.json({ message: 'This password reset link has expired' });
@@ -107,7 +108,7 @@ router.post('/confirm-token', async (req, res) => {
 
 // Send confirm password changed email
 router.post('/send-confirm', async function(req, res, next) {
-  let userData = req.body.data;
+  const userData = req.body.data;
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -117,8 +118,8 @@ router.post('/send-confirm', async function(req, res, next) {
       type: 'Oauth2',
       user: 'david@mealdig.com',
       serviceClient: key.client_id,
-      privateKey: key.private_key
-    }
+      privateKey: key.private_key,
+    },
   });
   try {
     await transporter.verify();

@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
 
 // Gets a list of users with populated order information.
 router.get('/all', (req, res) => {
-  User.find({}).deepPopulate(['orders']).then(allUsers => res.json(allUsers));
+  User.find({})
+    .deepPopulate(['orders'])
+    .then(allUsers => res.json(allUsers));
 });
 
 // Gets a specific user by user name with orders
@@ -40,8 +42,8 @@ router.post('/update-user', async (req, res) => {
         userFullName: req.body.userFullName,
         userName: req.body.userName,
         email: req.body.email,
-        accessLevel: req.body.accessLevel
-      }
+        accessLevel: req.body.accessLevel,
+      },
     }
   ).then(updatedUser => {
     res.json(updatedUser);
@@ -59,8 +61,8 @@ router.post('/create/:userFullName', (req, res) => {
 // Creates a new user
 router.post('/signup', async (req, res) => {
   try {
-    var user = new User(req.body);
-    var result = await user.save();
+    const user = new User(req.body);
+    const result = await user.save();
     res.send(result);
   } catch (error) {
     res.status(500).send(error);
@@ -70,18 +72,18 @@ router.post('/signup', async (req, res) => {
 // Exisitng User Login
 router.post('/login', async (req, res) => {
   try {
-    var user = await User.findOne({ email: req.body.email }).exec();
+    const user = await User.findOne({ email: req.body.email }).exec();
     if (!user) {
       res.send({
         message: 'The email does not exist',
-        emailMatch: false
+        emailMatch: false,
       });
       return res.status(400);
     }
     if (!bcrypt.compareSync(req.body.password, user.password)) {
       res.send({
         message: 'The password is invalid',
-        passwordMatch: false
+        passwordMatch: false,
       });
       return res.status(400);
     }
@@ -90,7 +92,7 @@ router.post('/login', async (req, res) => {
       userFullName: user.userFullName,
       userName: user.userName,
       email: user.email,
-      accessLevel: user.accessLevel
+      accessLevel: user.accessLevel,
     });
     res.send({ message: 'The email and password combination is correct!' });
   } catch (error) {
@@ -101,7 +103,7 @@ router.post('/login', async (req, res) => {
 // Not sure what this does.
 router.get('/dump', async (req, res) => {
   try {
-    var result = await User.find().exec();
+    const result = await User.find().exec();
     res.send(result);
   } catch (error) {
     res.status(500).send(error);

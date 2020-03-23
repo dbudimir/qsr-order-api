@@ -6,7 +6,7 @@ const ChipotleOrderSchema = new mongoose.Schema({
   fillings: [],
   rice: { type: String },
   beans: { type: String },
-  toppings: []
+  toppings: [],
 });
 
 const ChipotleOrder = mongoose.model('ChipotleOrder', ChipotleOrderSchema);

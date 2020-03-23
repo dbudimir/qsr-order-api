@@ -1,6 +1,6 @@
-const mongoose = require('../connection.js');
 const bcrypt = require('bcryptjs');
 const uniqueValidator = require('mongoose-unique-validator');
+const mongoose = require('../connection.js');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 const UserSchema = new mongoose.Schema(
@@ -13,20 +13,20 @@ const UserSchema = new mongoose.Schema(
     orders: [
       {
         ref: 'Order',
-        type: mongoose.Schema.Types.ObjectId
-      }
+        type: mongoose.Schema.Types.ObjectId,
+      },
     ],
     favorites: [
       {
         ref: 'Order',
-        type: mongoose.Schema.Types.ObjectId
-      }
+        type: mongoose.Schema.Types.ObjectId,
+      },
     ],
     resetPasswordToken: { type: String },
-    resetPasswordExpires: { type: Date }
+    resetPasswordExpires: { type: Date },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
