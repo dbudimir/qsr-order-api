@@ -139,4 +139,43 @@ router.post('/send-confirm', async function(req, res, next) {
   }
 });
 
+// Send feedback email
+router.post('/send-feedback', async function(req, res, next) {
+  console.log(req.body);
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+      type: 'Oauth2',
+      user: 'david@mealdig.com',
+      serviceClient: key.client_id,
+      privateKey: key.private_key,
+    },
+  });
+  try {
+    await transporter.verify();
+    await transporter.sendMail({
+      from: 'noreply@mealdig.com',
+      to: 'david@mealdig.com',
+      subject: 'New Feedback Submitted',
+      // prettier-ignore
+      html: 
+			  `<p><b>Hi David!</b></p>
+			  <p>New Feedback Submitted</p>
+			  <p>Submitted By: 
+			  <br />${req.body.email}</p>
+			  <p>Page URL:
+			  <br/>${req.body.pageURL}</p>
+			  <p>Message: 
+			  <br />${req.body.emailMessage}</p>
+			  <a href='https://mealdig.com'>MealDig.com</a>`
+    });
+    res.send({ message: 'Email sent' });
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 module.exports = router;
